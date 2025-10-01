@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Donor Connect - Home</title>
+<style>
+/* Full page setup */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+/* Background gradient with soft animated particles */
+#background {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #ffe6f0, #fff0f5, #ffe6f0, #fff0f5);
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
+}
+
+/* Floating particles */
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(229, 147, 188, 0.5);
+    border-radius: 50%;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+    0% {transform: translateY(0px);}
+    100% {transform: translateY(-1200px);}
+}
+
+/* Navigation bar */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 2;
+    display: flex;
+    justify-content: right;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px ;
+    display: flex;
+    gap: 30px;
+    
+}
+
+nav ul li {
+    cursor: pointer;
+    font-weight: bold;
+    color: #ff4d6e;
+    transition: color 0.3s;
+}
+
+nav ul li:hover {
+    color: #ff1493;
+}
+
+
+/* Page content container */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: auto;
+    padding: 120px 20px 50px;
+    text-align: center;
+}
+
+/* Header */
+h1 {
+    font-size: 3em;
+    color: #ff4d6e;
+    margin-bottom: 20px;
+}
+
+/* Subtitle */
+p.subtitle {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 50px;
+}
+
+/* Button styles */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 18px 40px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #ff85c1, #ff4d94);
+}
+
+/* Feature cards */
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 60px;
+    gap: 20px;
+}
+
+.feature-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    width: 250px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.feature-card h3 {
+    color: #ff4d6e;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: #555;
+    font-size: 14px;
+}
+
+/* Section styling */
+section {
+    padding: 80px 20px;
+    margin-top: 50px;
+}
+
+section h2 {
+    font-size: 2.2em;
+    color: #ff4d6e;
+    margin-bottom: 40px;
+}
+
+/* Contact Info section */
+#contact {
+    background: linear-gradient(135deg, #ff4d6eab, #ff000073);
+    color: white;
+    padding: 50px 20px;
+    border-radius: 20px;
+    max-width: 1000px;
+    margin: 50px auto;
+    text-align: center;
+    line-height: 1.8;
+}
+</style>
+</head>
+<body>
+
+<!-- Background container -->
+<div id="background"></div>
+
+<!-- Navigation bar -->
+<nav>
+    <ul>
+        <li onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})">Home</li>
+        <li onclick="document.getElementById('instructions').scrollIntoView({behavior:'smooth'})">Instructions</li>
+        <li onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Info</li>
+    </ul>
+</nav>
+
+<!-- Page content -->
+<div class="container" id="home">
+    <h1>Blood Donor Connect</h1>
+    <p class="subtitle">Connecting patients with verified blood donors near them. Safe, fast, and reliable.</p>
+    <div class="button-container">
+        <button onclick="location.href='donor.html'">Register as Donor</button>
+        <button onclick="location.href='request.html'">Request Blood</button>
+    </div>
+
+    <!-- Home Feature cards -->
+    <div class="features">
+    <a href="vd.html" style="text-decoration: none; color: white;"> 
+        <div class="feature-card">
+            <h3>Verified Donors</h3>
+            <p>All donors are verified to ensure safe and reliable blood donation.</p>
+        </div>
+    </a>
+    <a href="ns.html" style="text-decoration: none; color: white;"> 
+        <div class="feature-card">
+            <h3>Nearby Search</h3>
+            <p>Find donors not only in your city but also nearby villages and towns.</p>
+        </div>
+        </a>
+    <a href="dh report.html" style="text-decoration: none; color: white;"> 
+        <div class="feature-card">
+            <h3>Donation History</h3>
+            <p>Check last donation date and availability of donors to ensure timely help.</p>
+        </div>
+    </a>
+    </div>
+</div>
+
+<!-- Instructions Section -->
+<section id="instructions">
+    <h2>Instructions</h2>
+    <div class="features">
+        <div class="feature-card">
+            <h3>Register as Donor</h3>
+            <p>Sign up to make yourself available for blood donation and help save lives.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Provide Accurate Info</h3>
+            <p>Ensure your blood group, contact, and health status are correctly entered.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Health Check</h3>
+            <p>Make sure you are healthy and fit to donate blood safely.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Request Blood</h3>
+            <p>If you need blood, submit a request to find verified donors nearby quickly.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Emergency Requests</h3>
+            <p>Mark your request as emergency to get faster responses from donors.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Follow Safety Protocols</h3>
+            <p>Maintain hygiene and follow proper donation guidelines during collection.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Donation History</h3>
+            <p>Track your past donations and ensure timely participation in future drives.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Respect Donors</h3>
+            <p>Always respect the donors’ time and availability during donations.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Update Contact Info</h3>
+            <p>Keep your contact info updated for smooth communication between donors and recipients.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Spread Awareness</h3>
+            <p>Encourage others in your community to donate blood and save lives.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Info Section -->
+<section id="contact">
+    <h2>Contact Info</h2>
+    <p>
+        Blood Donor Connect Support Team<br>
+        Email: support@blooddonorconnect.com<br>
+        Phone: +91 98765 43210<br>
+        Emergency Contact: +91 91234 56789 (24/7)<br>
+        Address: 123 Health Street, Wellness City, India<br>
+        Office Hours: Mon-Fri 9:00 AM - 6:00 PM
+    </p>
+</section>
+
+<script>
+// Floating particles
+const numParticles = 60;
+const background = document.getElementById('background');
+for(let i=0;i<numParticles;i++){
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random()*100+'vw';
+    particle.style.top = Math.random()*100+'vh';
+    const size = 4 + Math.random()*8;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    particle.style.animationDuration = (8 + Math.random()*12)+'s';
+    background.appendChild(particle);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donation Register</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(270deg, #ff9eb3, #ff6f91, #ff9eb3);
+    background-size: 600% 600%;
+    animation: gradientBG 12s ease infinite;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  h2 { text-align: center; margin-top: 20px; }
+  form { 
+    max-width: 800px; 
+    margin: 20px auto; 
+    background: rgba(0,0,0,0.3); 
+    padding: 20px; 
+    border-radius: 15px; 
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  }
+  label { display: block; margin-top: 10px; font-weight: bold; }
+  input, select, textarea { 
+    width: 100%; 
+    padding: 8px; 
+    margin-top: 5px; 
+    border-radius: 5px; 
+    border: none;
+  }
+  button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #ff6f91;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  button:hover { background: #ff4f70; }
+
+  .bubble {
+    position: absolute;
+    background: rgba(255,0,80,0.6);
+    border-radius: 50%;
+    animation: float 10s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes float {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+<h2>Donation Register Form</h2>
+<form id="registerForm">
+  <!-- Donor Details -->
+  <label>Donor Name</label>
+  <input type="text" id="donorName" required>
+
+  <label>Donor ID / Unique Code</label>
+  <input type="text" id="donorID" required>
+
+  <label>Blood Group</label>
+  <select id="bloodGroup" required>
+    <option value="">Select</option>
+    <option>A+</option><option>A-</option>
+    <option>B+</option><option>B-</option>
+    <option>O+</option><option>O-</option>
+    <option>AB+</option><option>AB-</option>
+  </select>
+
+  <!-- Donation Information -->
+  <label>Donation Date</label>
+  <input type="date" id="donationDate" required>
+
+  <label>Donation Time</label>
+  <input type="time" id="donationTime" required>
+
+  <label>Place / Hospital / Blood Bank</label>
+  <input type="text" id="donationPlace" required>
+
+  <!-- Medical Check & Eligibility -->
+  <label>Hemoglobin Level (g/dL)</label>
+  <input type="number" id="hemoglobin" required>
+
+  <label>Blood Pressure</label>
+  <input type="text" id="bloodPressure" required>
+
+  <label>Weight at Donation (kg)</label>
+  <input type="number" id="weight" required>
+
+  <label>Temporary Deferral (Yes/No, with reason)</label>
+  <textarea id="deferral" placeholder="If yes, mention reason"></textarea>
+
+  <!-- Donation Outcome -->
+  <label>Units Collected (ml)</label>
+  <input type="number" id="unitsCollected" required>
+
+  <label>Bag/Unit ID</label>
+  <input type="text" id="bagID" required>
+
+  <label>Usage (Emergency / Storage / Patient ID)</label>
+  <input type="text" id="usage" required>
+
+  <!-- Follow-up -->
+  <label>Next Eligible Donation Date</label>
+  <input type="date" id="nextDate" readonly>
+
+  <label>Donor Feedback / Remarks</label>
+  <textarea id="feedback"></textarea>
+
+  <label>Verified by (Doctor/Nurse/Admin Name)</label>
+  <input type="text" id="verifiedBy">
+
+  <!-- Verification Status -->
+  <label>Verification Status</label>
+  <select id="status">
+    <option>Pending</option>
+    <option>Verified</option>
+    <option>Rejected</option>
+  </select>
+
+  <!-- Extra Topics -->
+  <label>Reward Points / Badges</label>
+  <input type="text" id="rewards">
+
+  <label>SMS/Email Notification Sent (Yes/No)</label>
+  <select id="notification">
+    <option>Yes</option>
+    <option>No</option>
+  </select>
+
+  <label>Emergency Priority Tag</label>
+  <select id="priority">
+    <option>No</option>
+    <option>Yes</option>
+  </select>
+
+  <button type="submit">Save Record</button>
+  <button type="button" onclick="window.location='report.html'">Go to Report</button>
+</form>
+
+<script>
+const form = document.getElementById('registerForm');
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+
+  const record = {
+    donorName: document.getElementById('donorName').value,
+    donorID: document.getElementById('donorID').value,
+    bloodGroup: document.getElementById('bloodGroup').value,
+    donationDate: document.getElementById('donationDate').value,
+    donationTime: document.getElementById('donationTime').value,
+    donationPlace: document.getElementById('donationPlace').value,
+    hemoglobin: document.getElementById('hemoglobin').value,
+    bloodPressure: document.getElementById('bloodPressure').value,
+    weight: document.getElementById('weight').value,
+    deferral: document.getElementById('deferral').value,
+    unitsCollected: document.getElementById('unitsCollected').value,
+    bagID: document.getElementById('bagID').value,
+    usage: document.getElementById('usage').value,
+    nextDate: (() => {
+      const d = new Date(document.getElementById('donationDate').value);
+      d.setDate(d.getDate()+90);
+      return d.toISOString().split('T')[0];
+    })(),
+    feedback: document.getElementById('feedback').value,
+    verifiedBy: document.getElementById('verifiedBy').value,
+    status: document.getElementById('status').value,
+    rewards: document.getElementById('rewards').value,
+    notification: document.getElementById('notification').value,
+    priority: document.getElementById('priority').value
+  };
+
+  let records = JSON.parse(localStorage.getItem('donationRecords') || '[]');
+  records.push(record);
+  localStorage.setItem('donationRecords', JSON.stringify(records));
+
+  alert('Record saved successfully!');
+  form.reset();
+});
+function createBubble() {
+  const bubble = document.createElement('div');
+  bubble.classList.add('bubble');
+  const size = Math.random()*20+10;
+  bubble.style.width = size+'px';
+  bubble.style.height = size+'px';
+  bubble.style.left = Math.random()*window.innerWidth+'px';
+  document.body.appendChild(bubble);
+  setTimeout(()=>bubble.remove(),10000);
+}
+setInterval(createBubble,500);
+</script>
+</body>
+</html>

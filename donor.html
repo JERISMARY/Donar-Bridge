@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register as Donor</title>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #ff4d4d, #ffcccc);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .form-container {
+        background: rgba(255,255,255,0.95);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        width: 400px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #852f2f;
+    }
+
+    .back-btn {
+        background-color: #d27171;
+        margin-top: 15px;
+    }
+
+    .back-btn:hover {
+        background-color: #333;
+    }
+</style>
+</head>
+<body><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Background</title>
+<style>
+/* Full page setup */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Background container behind content */
+#background {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: -1; /* behind everything */
+    overflow: hidden;
+    background: linear-gradient(-45deg, #ffb6c1d6, #ff69b4d5, #ffc0cbd5, #ff1491d1);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+/* Gradient animation */
+@keyframes gradientBG {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
+}
+
+/* Floating blood drop particles */
+.drop {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(220, 144, 159, 0.7);
+    border-radius: 50%;
+    animation: floatDrop linear infinite;
+    pointer-events: none; /* don't interfere with content */
+}
+
+@keyframes floatDrop {
+    0% {transform: translateY(0px) translateX(0px);}
+    100% {transform: translateY(-1200px) translateX(20px);}
+}
+
+/* Example content on top of background */
+.container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    color: #333;
+}
+
+.content-box {
+    background: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+<body>
+
+<!-- Background container -->
+<div id="background"></div>
+
+
+
+<script>
+// Create floating blood drop particles
+const numDrops = 50;
+const background = document.getElementById('background');
+
+for(let i=0;i<numDrops;i++){
+    const drop = document.createElement('div');
+    drop.className = 'drop';
+    drop.style.left = Math.random() * 100 + 'vw';
+    drop.style.top = Math.random() * 100 + 'vh';
+    const size = 5 + Math.random()*10;
+    drop.style.width = size + 'px';
+    drop.style.height = size + 'px';
+    drop.style.animationDuration = (5 + Math.random()*10) + 's';
+    background.appendChild(drop);
+}
+</script>
+
+</body>
+</html>
+
+<div class="form-container">
+    <h2>Register as Donor</h2>
+    <input type="text" id="donorName" placeholder="Full Name">
+    <input type="text" id="donorBlood" placeholder="Blood Type (A+, O-, etc.)">
+    <input type="text" id="donorLocation" placeholder="City or Village">
+    <input type="email" id="donorEmail" placeholder="Email (example@gmail.com)">
+    <input type="tel" id="donorPhone" placeholder="Phone Number (+91-9999999999)">
+    <input type="date" id="lastDonation" placeholder="Last Donation Date">
+    <button id="registerBtn">Register</button>
+    <button class="back-btn" onclick="location.href='index.html'">Back to Home</button>
+</div>
+
+<script>
+    const donorName = document.getElementById('donorName');
+    const donorBlood = document.getElementById('donorBlood');
+    const donorLocation = document.getElementById('donorLocation');
+    const donorEmail = document.getElementById('donorEmail');
+    const donorPhone = document.getElementById('donorPhone');
+    const lastDonation = document.getElementById('lastDonation');
+    const registerBtn = document.getElementById('registerBtn');
+
+    let donors = JSON.parse(localStorage.getItem('donors')) || [];
+
+    registerBtn.addEventListener('click', () => {
+        if (!donorName.value || !donorBlood.value || !donorLocation.value || !donorEmail.value || !donorPhone.value || !lastDonation.value) {
+            alert("Please fill all fields");
+            return;
+        }
+
+        const donor = {
+            id: Date.now(), // unique ID
+            name: donorName.value,
+            blood: donorBlood.value.toUpperCase(),
+            location: donorLocation.value.toLowerCase(),
+            email: donorEmail.value,
+            phone: donorPhone.value,
+            lastDonation: lastDonation.value,
+            verified: Math.random() > 0.3 // 70% verified
+        };
+
+        donors.push(donor);
+        localStorage.setItem('donors', JSON.stringify(donors));
+
+        donorName.value = donorBlood.value = donorLocation.value = donorEmail.value = donorPhone.value = lastDonation.value = '';
+        alert("Donor Registered Successfully!");
+    });
+</script>
+
+</body>
+</html>
